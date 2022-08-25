@@ -1,0 +1,115 @@
+<mxfile host="65bd71144e">
+    <diagram id="LhJ8ON7SiD7B-he_QWnQ" name="Page-1">
+        <mxGraphModel dx="2523" dy="1219" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="I-vYuPlhx-Z6TTZ9ozwb-2" target="Ir6waPqo-X5nPPkwcRdq-20" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-38" value="(TUID, GUID)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="I-vYuPlhx-Z6TTZ9ozwb-2" target="Ir6waPqo-X5nPPkwcRdq-37" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="I-vYuPlhx-Z6TTZ9ozwb-2" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Graph Ingester&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-505" y="850" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="I-vYuPlhx-Z6TTZ9ozwb-3" target="Ir6waPqo-X5nPPkwcRdq-1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-24" value="Submit subgraph for ingestation" style="text;html=1;resizable=0;points=[];align=center;verticalAlign=middle;labelBackgroundColor=#ffffff;" parent="Ir6waPqo-X5nPPkwcRdq-15" vertex="1" connectable="0">
+                    <mxGeometry x="-0.225" relative="1" as="geometry">
+                        <mxPoint x="5" y="9" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="I-vYuPlhx-Z6TTZ9ozwb-3" value="&lt;font face=&quot;Courier New&quot; style=&quot;font-size: 14px&quot;&gt;Source&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-505" y="50" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="Ir6waPqo-X5nPPkwcRdq-1" target="Ir6waPqo-X5nPPkwcRdq-8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-23" value="Publish subgraph to queue" style="text;html=1;resizable=0;points=[];align=center;verticalAlign=middle;labelBackgroundColor=#ffffff;" parent="Ir6waPqo-X5nPPkwcRdq-16" vertex="1" connectable="0">
+                    <mxGeometry x="-0.1" y="-2" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-1" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Gateway&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-505" y="210" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="Ir6waPqo-X5nPPkwcRdq-8" target="Ir6waPqo-X5nPPkwcRdq-11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-8" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Queue&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-505" y="370" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="Ir6waPqo-X5nPPkwcRdq-11" target="Ir6waPqo-X5nPPkwcRdq-13" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-22" value="Publish &quot;labeled&quot; subgraph" style="text;html=1;resizable=0;points=[];align=center;verticalAlign=middle;labelBackgroundColor=#ffffff;" parent="Ir6waPqo-X5nPPkwcRdq-18" vertex="1" connectable="0">
+                    <mxGeometry x="-0.1" y="-1" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-39" value="Lookup by TUID" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="Ir6waPqo-X5nPPkwcRdq-11" target="Ir6waPqo-X5nPPkwcRdq-25" edge="1">
+                    <mxGeometry x="-0.1429" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-280" y="570"/>
+                            <mxPoint x="-280" y="570"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-11" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Entity Registry&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-505" y="530" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="Ir6waPqo-X5nPPkwcRdq-13" target="I-vYuPlhx-Z6TTZ9ozwb-2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-13" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Queue&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-505" y="690" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-20" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Knowledge Graph&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-505" y="1010" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-25" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Persistent KV&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-240" y="530" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="Ir6waPqo-X5nPPkwcRdq-37" target="Ir6waPqo-X5nPPkwcRdq-44" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-37" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Queue&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-240" y="850" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="Ir6waPqo-X5nPPkwcRdq-44" target="Ir6waPqo-X5nPPkwcRdq-25" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-47" value="Add document" style="text;html=1;resizable=0;points=[];align=center;verticalAlign=middle;labelBackgroundColor=#ffffff;" parent="Ir6waPqo-X5nPPkwcRdq-46" vertex="1" connectable="0">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-44" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Cacher&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-240" y="690" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="Ir6waPqo-X5nPPkwcRdq-50" target="Ir6waPqo-X5nPPkwcRdq-25" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-10" y="1050"/>
+                            <mxPoint x="-10" y="570"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-53" value="Find documents &lt;br&gt;with multiple GUIDs" style="text;html=1;resizable=0;points=[];align=center;verticalAlign=middle;labelBackgroundColor=#ffffff;" parent="Ir6waPqo-X5nPPkwcRdq-51" vertex="1" connectable="0">
+                    <mxGeometry x="0.0677" y="3" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="Ir6waPqo-X5nPPkwcRdq-50" target="Ir6waPqo-X5nPPkwcRdq-20" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-50" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Repairer&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-240" y="1010" width="160" height="80" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
