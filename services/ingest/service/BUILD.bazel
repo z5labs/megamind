@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "service",
@@ -7,6 +7,19 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//services/ingest/service/proto",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//credentials/insecure",
+        "@org_uber_go_zap//:zap",
+    ],
+)
+
+go_test(
+    name = "service_test",
+    srcs = ["service_test.go"],
+    embed = [":service"],
+    deps = [
+        "//services/ingest/service/proto",
+        "//subgraph",
         "@org_golang_google_grpc//:go_default_library",
         "@org_golang_google_grpc//credentials/insecure",
         "@org_uber_go_zap//:zap",

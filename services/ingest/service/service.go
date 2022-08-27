@@ -43,6 +43,7 @@ func (s *SubgraphIngester) Serve(ctx context.Context, ls net.Listener) error {
 
 	select {
 	case <-cctx.Done():
+		grpcServer.GracefulStop()
 		<-errCh
 		return cctx.Err()
 	case err := <-errCh:
