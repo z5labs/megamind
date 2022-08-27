@@ -8,7 +8,7 @@ import (
 
 // Execute
 func Execute(args ...string) {
-	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
+	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill)
 	defer cancel()
 
 	if len(args) == 0 {

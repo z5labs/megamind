@@ -9,6 +9,7 @@ import (
 
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 // SubgraphIngester
@@ -27,7 +28,7 @@ func New(logger *zap.Logger) *SubgraphIngester {
 
 // Serve instantiates the gRPC server and registers the SubgraphIngest service with it.
 func (s *SubgraphIngester) Serve(ctx context.Context, ls net.Listener) error {
-	grpcServer := grpc.NewServer()
+	grpcServer := grpc.NewServer(grpc.Creds(insecure.NewCredentials()))
 	pb.RegisterSubgraphIngestServer(grpcServer, s)
 
 	errCh := make(chan error, 1)
