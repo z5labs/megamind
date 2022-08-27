@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package subgraph;
+
+message Subgraph {
+  repeated Triple triples = 1;
+}
+
+message Triple {
+  Subject subject = 1;
+  Predicate predicate = 2;
+  Object object = 3;
+}
+
+message Subject {
+  string type = 1;
+  string tuid = 2;
+}
+
+message Predicate {
+  string name = 1;
+}
+
+message Object {
+  oneof value {
+    Subject subject = 1;
+    string string = 2;
+    int64 int64 = 3;
+    double float64 = 4;
+  }
+}
