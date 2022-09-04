@@ -23,8 +23,20 @@ jobs:
           path: "~/.cache/bazel"
           key: bazel
 
+      - name: Setup useful build info
+        id: info
+        run: |
+          echo "::set-output name=datetime::$(date +'%Y-%m-%d-%H%M%S')"
+          echo "::set-output name=short_commit_id::$(git rev-parse --short HEAD)"
+
       - name: Build
         run: bazel build //...
 
       - name: Test
         run: bazel coverage //...
+
+      - name: Deploy images
+        run: |
+          version="${{ steps.info.outputs.datetime }}-${{ steps.info.outputs.short_commit_id }}"
+          images=$(bazel query "kind(\"container_push\", //...)" --output=label)
+          bazel run --define "version=$version" $images
