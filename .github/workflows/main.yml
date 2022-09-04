@@ -36,6 +36,13 @@ jobs:
       - name: Test
         run: bazel coverage //...
 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy images
         run: |
           version="${{ steps.info.outputs.date }}.${{ steps.info.outputs.time }}.${{ steps.info.outputs.short_commit_id }}"
