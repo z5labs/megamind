@@ -23,8 +23,28 @@ jobs:
           path: "~/.cache/bazel"
           key: bazel
 
+      - name: Setup useful build info
+        id: info
+        run: |
+          echo "::set-output name=date::$(date +'%Y.%m.%d')"
+          echo "::set-output name=time::$(date +'%H%M%S')"
+          echo "::set-output name=short_commit_id::$(git rev-parse --short HEAD)"
+
       - name: Build
         run: bazel build //...
 
       - name: Test
         run: bazel coverage //...
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy images
+        run: |
+          version="${{ steps.info.outputs.date }}.${{ steps.info.outputs.time }}.${{ steps.info.outputs.short_commit_id }}"
+          images=$(bazel query "kind(\"container_push\", //...)" --output=label)
+          bazel run --define "version=$version" $images
