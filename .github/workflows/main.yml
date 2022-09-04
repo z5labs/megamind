@@ -26,7 +26,8 @@ jobs:
       - name: Setup useful build info
         id: info
         run: |
-          echo "::set-output name=datetime::$(date +'%Y-%m-%d-%H%M%S')"
+          echo "::set-output name=date::$(date +'%Y.%m.%d')"
+          echo "::set-output name=time::$(date +'%H%M%S')"
           echo "::set-output name=short_commit_id::$(git rev-parse --short HEAD)"
 
       - name: Build
@@ -37,6 +38,6 @@ jobs:
 
       - name: Deploy images
         run: |
-          version="${{ steps.info.outputs.datetime }}-${{ steps.info.outputs.short_commit_id }}"
+          version="${{ steps.info.outputs.date }}.${{ steps.info.outputs.time }}.${{ steps.info.outputs.short_commit_id }}"
           images=$(bazel query "kind(\"container_push\", //...)" --output=label)
           bazel run --define "version=$version" $images

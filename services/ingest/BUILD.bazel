@@ -28,6 +28,7 @@ container_push(
     format = "OCI",
     registry = "ghcr.io",
     repository = "z5labs/megamind",
+    skip_unchanged_digest = True, # don't push if its the same
     tag = "$(version)",
     tags = ["manual"]
 )
