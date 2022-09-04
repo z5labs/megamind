@@ -27,7 +27,7 @@ container_push(
     image = ":image",
     format = "OCI",
     registry = "ghcr.io",
-    repository = "z5labs/megamind",
+    repository = "z5labs/megamind/subgraph-ingester",
     skip_unchanged_digest = True, # don't push if its the same
     tag = "$(version)",
     tags = ["manual"]
