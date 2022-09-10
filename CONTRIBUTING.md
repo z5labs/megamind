@@ -8,6 +8,7 @@
   * [Testing](#testing)
 * [Contributing](#contributing)
    * [Guidelines](#guidelines)
+   * [Commit messages](#commit-messages)
    * [Code style](#code-style)
    * [License Header](#license-header)
    * [Signed Commits](#signed-commits)
@@ -24,6 +25,7 @@ both [Kubernetes](https://kubernetes.io/) and [Knative](https://knative.dev).
 - Install [bazelisk](https://github.com/bazelbuild/bazelisk) (this will then automatically install and manage [bazel](https://bazel.build/) for you)
   - Depending on how you install bazelisk, it may not automatically add an alias for bazel. In that case, please manually alias bazel to bazelisk e.g. `alias bazel=bazelisk`.
 - Install [Docker](https://docs.docker.com/install/)
+- Install [Terraform](https://www.terraform.io/)
 - Have access to a [Kubernetes](https://kubernetes.io/) cluster for testing.
   - Personally, recommend [minikube](https://minikube.sigs.k8s.io/docs/start/) for local development and testing.
 
@@ -71,6 +73,10 @@ $ bazel test //...
 - Don't ship a half done feature, which would require significant alterations to work fully.
 - Avoid [Technical debt](https://en.wikipedia.org/wiki/Technical_debt) like cancer.
 - Leave the code cleaner than when you began.
+
+### Commit messages
+
+All commits should follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) standard.
 
 ### Code style
 - We're following [Go Code Review](https://github.com/golang/go/wiki/CodeReviewComments).
