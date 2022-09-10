@@ -36,3 +36,13 @@ module "knative_eventing" {
     module.knative_operator,
   ]
 }
+
+module "megamind" {
+  source = "./modules/megamind"
+  providers = {
+    kubernetes = kubernetes
+  }
+  depends_on = [
+    module.knative_eventing
+  ]
+}
