@@ -1,6 +1,7 @@
 bazel-*
 .vscode
 .DS_Store
+tools/
 
 # Local .terraform directories
 **/.terraform/*
