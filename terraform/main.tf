@@ -32,7 +32,16 @@ module "knative_eventing" {
     kubernetes = kubernetes
   }
   depends_on = [
-    module.k8s_dashboard,
+    module.knative_operator,
+  ]
+}
+
+module "knative_serving" {
+  source = "./modules/knative/serving"
+  providers = {
+    kubernetes = kubernetes
+  }
+  depends_on = [
     module.knative_operator,
   ]
 }
@@ -43,6 +52,7 @@ module "megamind" {
     kubernetes = kubernetes
   }
   depends_on = [
-    module.knative_eventing
+    module.knative_eventing,
+    module.knative_serving,
   ]
 }
