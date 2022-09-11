@@ -22,15 +22,34 @@ message Subgraph {
   repeated Triple triples = 1;
 }
 
+message LabelledSubgraph {
+  repeated LabelledTriple triples = 1;
+}
+
 message Triple {
   Subject subject = 1;
   Predicate predicate = 2;
   Object object = 3;
 }
 
+message LabelledTriple {
+  oneof subject {
+    Subject unlabelled = 1;
+    LabelledSubject labelled = 2;
+  }
+  Predicate predicate = 3;
+  LabelledObject object = 4;
+}
+
 message Subject {
   string type = 1;
   string tuid = 2;
+}
+
+message LabelledSubject {
+  string type = 1;
+  string tuid = 2;
+  string guid = 3;
 }
 
 message Predicate {
@@ -43,5 +62,15 @@ message Object {
     string string = 2;
     int64 int64 = 3;
     double float64 = 4;
+  }
+}
+
+message LabelledObject {
+  oneof value {
+    Subject subject = 1;
+    LabelledSubject labelled_subject = 2;
+    string string = 3;
+    int64 int64 = 4;
+    double float64 = 5;
   }
 }
