@@ -17,9 +17,11 @@
 package cmd
 
 import (
+	"errors"
 	"net"
 
 	"github.com/z5labs/megamind/services/ingest/grpc"
+	"github.com/z5labs/megamind/services/ingest/ingest"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -30,24 +32,24 @@ var grpcCmd = &cobra.Command{
 	Use:   "grpc",
 	Short: "Serve requests over gRPC",
 	Run: func(cmd *cobra.Command, args []string) {
-		grpcAddr := viper.GetString("grpc-addr")
-		ls, err := net.Listen("tcp", grpcAddr)
+		addr := viper.GetString("addr")
+		ls, err := net.Listen("tcp", addr)
 		if err != nil {
 			zap.L().Fatal(
 				"unexpected error when trying to listen on address",
-				zap.String("grpc_addr", grpcAddr),
+				zap.String("addr", addr),
 				zap.Error(err),
 			)
 			return
 		}
-		zap.L().Info("listening for grpc requests", zap.String("grpc_addr", grpcAddr))
+		zap.L().Info("listening for grpc requests", zap.String("addr", addr))
 
-		s := grpc.NewSubgraphIngester(zap.L().Named("service"))
-		err = s.Serve(cmd.Context(), ls)
-		if err != nil {
+		s := ingest.NewSubgraphIngester(zap.L())
+		err = grpc.Serve(cmd.Context(), ls, s)
+		if err != nil && !errors.Is(err, grpc.ErrServerStopped) {
 			zap.L().Fatal(
 				"unexpected error when serving grpc traffic",
-				zap.String("grpc_addr", grpcAddr),
+				zap.String("addr", addr),
 				zap.Error(err),
 			)
 			return
@@ -57,9 +59,4 @@ var grpcCmd = &cobra.Command{
 
 func init() {
 	serveCmd.AddCommand(grpcCmd)
-
-	// Flags
-	grpcCmd.Flags().String("addr", "0.0.0.0:8080", "Address which the gRPC service will listen for connections.")
-
-	viper.BindPFlag("addr", rootCmd.Flags().Lookup("addr"))
 }

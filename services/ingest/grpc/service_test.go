@@ -23,9 +23,11 @@ import (
 	"testing"
 	"time"
 
-	pb "github.com/z5labs/megamind/services/ingest/grpc/proto"
+	"github.com/z5labs/megamind/services/ingest/ingest"
+	pb "github.com/z5labs/megamind/services/ingest/proto"
 	"github.com/z5labs/megamind/subgraph"
 
+	"github.com/stretchr/testify/assert"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -39,10 +41,10 @@ func newSubgraphIngester(ctx context.Context, logger *zap.Logger) (net.Addr, <-c
 		return nil, errCh
 	}
 
-	s := NewSubgraphIngester(logger)
+	s := ingest.NewSubgraphIngester(logger)
 	go func() {
 		defer close(errCh)
-		err := s.Serve(ctx, ls)
+		err := Serve(ctx, ls, s)
 		errCh <- err
 	}()
 
@@ -55,15 +57,13 @@ func TestSubgraphIngester(t *testing.T) {
 		defer cancel()
 
 		addr, errCh := newSubgraphIngester(ctx, zap.L())
-		if addr == nil {
-			subT.Error(<-errCh)
+		if !assert.NotNil(subT, addr) {
 			return
 		}
 		cancel()
 
 		err := <-errCh
-		if err != context.Canceled {
-			subT.Fail()
+		if !assert.Equal(subT, ErrServerStopped, err) {
 			return
 		}
 	})
@@ -73,21 +73,18 @@ func TestSubgraphIngester(t *testing.T) {
 		defer cancel()
 
 		addr, errCh := newSubgraphIngester(ctx, zap.L())
-		if addr == nil {
-			subT.Fail()
+		if !assert.NotNil(subT, addr) {
 			return
 		}
 
 		cc, err := grpc.Dial(addr.String(), grpc.WithTransportCredentials(insecure.NewCredentials()))
-		if err != nil {
-			subT.Error(err)
+		if !assert.Nil(subT, err) {
 			return
 		}
 		client := pb.NewSubgraphIngestClient(cc)
 
 		stream, err := client.Ingest(ctx)
-		if err != nil {
-			subT.Error(err)
+		if !assert.Nil(subT, err) {
 			return
 		}
 		err = stream.Send(&subgraph.Subgraph{
@@ -108,20 +105,17 @@ func TestSubgraphIngester(t *testing.T) {
 				},
 			},
 		})
-		if err != nil {
-			subT.Error(err)
+		if !assert.Nil(subT, err) {
 			return
 		}
 		_, err = stream.CloseAndRecv()
-		if err != nil && err != io.EOF {
-			subT.Error(err)
+		if !assert.Equal(subT, io.EOF, err) {
 			return
 		}
 		cancel()
 
 		err = <-errCh
-		if err != nil && err != context.Canceled {
-			subT.Error(err)
+		if !assert.Equal(subT, ErrServerStopped, err) {
 			return
 		}
 	})

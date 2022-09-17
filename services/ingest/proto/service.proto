@@ -21,6 +21,8 @@ package proto;
 import "subgraph/subgraph.proto";
 
 service SubgraphIngest {
+  rpc IngestSubgraph (subgraph.Subgraph) returns (IngestResponse);
+
   rpc Ingest (stream subgraph.Subgraph) returns (IngestResponse);
 }
 

@@ -18,6 +18,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var serveCmd = &cobra.Command{
@@ -27,4 +28,10 @@ var serveCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
+
+	// Flags
+	serveCmd.Flags().String("addr", "0.0.0.0:8080", "Address to listen for connections.")
+
+	viper.BindPFlag("addr", serveCmd.Flags().Lookup("addr"))
+	
 }

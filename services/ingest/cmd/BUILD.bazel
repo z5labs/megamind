@@ -13,6 +13,8 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//services/ingest/grpc",
+        "//services/ingest/http",
+        "//services/ingest/ingest",
         "@com_github_spf13_cobra//:cobra",
         "@com_github_spf13_viper//:viper",
         "@org_uber_go_zap//:zap",
