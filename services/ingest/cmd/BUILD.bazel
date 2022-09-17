@@ -5,6 +5,7 @@ go_library(
     srcs = [
         "cmd.go",
         "grpc.go",
+        "http.go",
         "root.go",
         "serve.go",
     ],
