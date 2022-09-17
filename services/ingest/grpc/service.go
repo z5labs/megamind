@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package service
+package grpc
 
 import (
 	"context"
 	"io"
 	"net"
 
-	pb "github.com/z5labs/megamind/services/ingest/service/proto"
+	pb "github.com/z5labs/megamind/services/ingest/grpc/proto"
 
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -35,8 +35,8 @@ type SubgraphIngester struct {
 	logger *zap.Logger
 }
 
-// New
-func New(logger *zap.Logger) *SubgraphIngester {
+// NewSubgraphIngester
+func NewSubgraphIngester(logger *zap.Logger) *SubgraphIngester {
 	return &SubgraphIngester{
 		logger: logger,
 	}

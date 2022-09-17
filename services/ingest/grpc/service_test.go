@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package service
+package grpc
 
 import (
 	"context"
@@ -23,7 +23,7 @@ import (
 	"testing"
 	"time"
 
-	pb "github.com/z5labs/megamind/services/ingest/service/proto"
+	pb "github.com/z5labs/megamind/services/ingest/grpc/proto"
 	"github.com/z5labs/megamind/subgraph"
 
 	"go.uber.org/zap"
@@ -39,7 +39,7 @@ func newSubgraphIngester(ctx context.Context, logger *zap.Logger) (net.Addr, <-c
 		return nil, errCh
 	}
 
-	s := New(logger)
+	s := NewSubgraphIngester(logger)
 	go func() {
 		defer close(errCh)
 		err := s.Serve(ctx, ls)
@@ -92,7 +92,7 @@ func TestSubgraphIngester(t *testing.T) {
 		}
 		err = stream.Send(&subgraph.Subgraph{
 			Triples: []*subgraph.Triple{
-				&subgraph.Triple{
+				{
 					Subject: &subgraph.Subject{
 						Type: "Person",
 						Tuid: "1",

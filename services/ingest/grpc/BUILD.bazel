@@ -1,12 +1,12 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
-    name = "service",
+    name = "grpc",
     srcs = ["service.go"],
-    importpath = "github.com/z5labs/megamind/services/ingest/service",
+    importpath = "github.com/z5labs/megamind/services/ingest/grpc",
     visibility = ["//visibility:public"],
     deps = [
-        "//services/ingest/service/proto",
+        "//services/ingest/grpc/proto",
         "@org_golang_google_grpc//:go_default_library",
         "@org_golang_google_grpc//credentials/insecure",
         "@org_uber_go_zap//:zap",
@@ -14,11 +14,11 @@ go_library(
 )
 
 go_test(
-    name = "service_test",
+    name = "grpc_test",
     srcs = ["service_test.go"],
-    embed = [":service"],
+    embed = [":grpc"],
     deps = [
-        "//services/ingest/service/proto",
+        "//services/ingest/grpc/proto:service_go_proto",
         "//subgraph",
         "@org_golang_google_grpc//:go_default_library",
         "@org_golang_google_grpc//credentials/insecure",
