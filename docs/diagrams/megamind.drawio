@@ -1,23 +1,20 @@
 <mxfile host="65bd71144e">
     <diagram id="LhJ8ON7SiD7B-he_QWnQ" name="Page-1">
-        <mxGraphModel dx="2188" dy="975" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+        <mxGraphModel dx="2188" dy="949" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="22" value="" style="group" parent="1" vertex="1" connectable="0">
-                    <mxGeometry x="-771" y="10" width="692" height="1081" as="geometry"/>
+                    <mxGeometry x="-771" y="10" width="770" height="1081" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;" vertex="1" parent="22">
+                    <mxGeometry x="-29" y="140" width="799" height="940" as="geometry"/>
                 </mxCell>
                 <mxCell id="I-vYuPlhx-Z6TTZ9ozwb-2" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Graph Mutator&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="22" vertex="1">
                     <mxGeometry y="800" width="160" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="I-vYuPlhx-Z6TTZ9ozwb-3" value="&lt;font face=&quot;Courier New&quot; style=&quot;font-size: 14px&quot;&gt;Client&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="22" vertex="1">
-                    <mxGeometry width="160" height="80" as="geometry"/>
-                </mxCell>
-                <mxCell id="Ir6waPqo-X5nPPkwcRdq-1" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Subgraph Ingester&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="22" vertex="1">
+                <mxCell id="Ir6waPqo-X5nPPkwcRdq-1" value="&lt;span style=&quot;font-family: &amp;#34;courier new&amp;#34; ; font-size: 14px&quot;&gt;Subgraph Ingester&lt;br&gt;(REST)&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="22" vertex="1">
                     <mxGeometry y="160" width="160" height="80" as="geometry"/>
-                </mxCell>
-                <mxCell id="11" value="&quot;raw&quot; subgraph" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Courier New;fontSize=14;" parent="22" source="I-vYuPlhx-Z6TTZ9ozwb-3" target="Ir6waPqo-X5nPPkwcRdq-1" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="Ir6waPqo-X5nPPkwcRdq-8" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;Knative&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="22" vertex="1">
                     <mxGeometry y="320" width="160" height="80" as="geometry"/>
@@ -114,6 +111,30 @@
                     <mxGeometry x="242" y="971" width="160" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="20" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Courier New;fontSize=14;" parent="22" source="16" target="18" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="&lt;font style=&quot;font-size: 18px&quot; face=&quot;Courier New&quot;&gt;Megamind&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;" vertex="1" parent="22">
+                    <mxGeometry x="666" y="140" width="105" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Courier New;fontSize=18;" edge="1" parent="22" source="25" target="Ir6waPqo-X5nPPkwcRdq-8">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="266" y="360"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="25" value="&lt;span style=&quot;font-family: &amp;#34;courier new&amp;#34; ; font-size: 14px&quot;&gt;Subgraph Ingester&lt;br&gt;(gRPC)&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="22">
+                    <mxGeometry x="186" y="160" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="I-vYuPlhx-Z6TTZ9ozwb-3" value="&lt;font face=&quot;Courier New&quot; style=&quot;font-size: 14px&quot;&gt;Client&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="22" vertex="1">
+                    <mxGeometry x="91" y="-10" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="&quot;raw&quot; subgraph" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Courier New;fontSize=14;" parent="22" source="I-vYuPlhx-Z6TTZ9ozwb-3" target="Ir6waPqo-X5nPPkwcRdq-1" edge="1">
+                    <mxGeometry x="-0.6685" y="10" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="28" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Courier New;fontSize=18;" edge="1" parent="22" source="I-vYuPlhx-Z6TTZ9ozwb-3" target="25">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
             </root>
