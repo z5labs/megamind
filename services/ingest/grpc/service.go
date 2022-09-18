@@ -14,36 +14,23 @@
  * limitations under the License.
  */
 
-package service
+package grpc
 
 import (
 	"context"
-	"io"
 	"net"
 
-	pb "github.com/z5labs/megamind/services/ingest/service/proto"
+	"github.com/z5labs/megamind/services/ingest/ingest"
+	pb "github.com/z5labs/megamind/services/ingest/proto"
 
-	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-// SubgraphIngester
-type SubgraphIngester struct {
-	pb.UnimplementedSubgraphIngestServer
-
-	logger *zap.Logger
-}
-
-// New
-func New(logger *zap.Logger) *SubgraphIngester {
-	return &SubgraphIngester{
-		logger: logger,
-	}
-}
+var ErrServerStopped = grpc.ErrServerStopped
 
 // Serve instantiates the gRPC server and registers the SubgraphIngest service with it.
-func (s *SubgraphIngester) Serve(ctx context.Context, ls net.Listener) error {
+func Serve(ctx context.Context, ls net.Listener, s *ingest.SubgraphIngester) error {
 	grpcServer := grpc.NewServer(grpc.Creds(insecure.NewCredentials()))
 	pb.RegisterSubgraphIngestServer(grpcServer, s)
 
@@ -61,27 +48,9 @@ func (s *SubgraphIngester) Serve(ctx context.Context, ls net.Listener) error {
 	case <-cctx.Done():
 		grpcServer.GracefulStop()
 		<-errCh
-		return cctx.Err()
+		return ErrServerStopped
 	case err := <-errCh:
 		cancel()
 		return err
-	}
-}
-
-// Ingest
-func (s *SubgraphIngester) Ingest(stream pb.SubgraphIngest_IngestServer) error {
-	for {
-		subgraph, err := stream.Recv()
-		if err == io.EOF {
-			return nil
-		}
-		if err != nil {
-			return err
-		}
-
-		s.logger.Info(
-			"received subgraph",
-			zap.Int("num_of_triples", len(subgraph.Triples)),
-		)
 	}
 }

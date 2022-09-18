@@ -17,10 +17,6 @@
 package cmd
 
 import (
-	"net"
-
-	"github.com/z5labs/megamind/services/ingest/service"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
@@ -62,30 +58,6 @@ var rootCmd = &cobra.Command{
 
 		zap.ReplaceGlobals(l)
 	},
-	Run: func(cmd *cobra.Command, args []string) {
-		grpcAddr := viper.GetString("grpc-addr")
-		ls, err := net.Listen("tcp", grpcAddr)
-		if err != nil {
-			zap.L().Fatal(
-				"unexpected error when trying to listen on address",
-				zap.String("grpc_addr", grpcAddr),
-				zap.Error(err),
-			)
-			return
-		}
-		zap.L().Info("listening for grpc requests", zap.String("grpc_addr", grpcAddr))
-
-		s := service.New(zap.L().Named("service"))
-		err = s.Serve(cmd.Context(), ls)
-		if err != nil {
-			zap.L().Fatal(
-				"unexpected error when serving grpc traffic",
-				zap.String("grpc_addr", grpcAddr),
-				zap.Error(err),
-			)
-			return
-		}
-	},
 }
 
 func init() {
@@ -95,9 +67,4 @@ func init() {
 	rootCmd.PersistentFlags().String("log-file", "stderr", "Specify log file")
 
 	viper.BindPFlag("log-file", rootCmd.PersistentFlags().Lookup("log-file"))
-
-	// Flags
-	rootCmd.Flags().String("grpc-addr", "0.0.0.0:8080", "Address which the gRPC will listen for requests.")
-
-	viper.BindPFlag("grpc-addr", rootCmd.Flags().Lookup("grpc-addr"))
 }

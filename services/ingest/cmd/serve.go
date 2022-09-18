@@ -14,16 +14,24 @@
  * limitations under the License.
  */
 
-syntax = "proto3";
+package cmd
 
-package proto;
+import (
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+)
 
-import "subgraph/subgraph.proto";
-
-service SubgraphIngest {
-  rpc Ingest (stream subgraph.Subgraph) returns (IngestResponse);
+var serveCmd = &cobra.Command{
+	Use:   "serve",
+	Short: "Serve requests",
 }
 
-message IngestResponse {
-  
+func init() {
+	rootCmd.AddCommand(serveCmd)
+
+	// Flags
+	serveCmd.Flags().String("addr", "0.0.0.0:8080", "Address to listen for connections.")
+
+	viper.BindPFlag("addr", serveCmd.Flags().Lookup("addr"))
+	
 }

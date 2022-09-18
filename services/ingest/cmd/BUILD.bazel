@@ -4,12 +4,17 @@ go_library(
     name = "cmd",
     srcs = [
         "cmd.go",
+        "grpc.go",
+        "http.go",
         "root.go",
+        "serve.go",
     ],
     importpath = "github.com/z5labs/megamind/services/ingest/cmd",
     visibility = ["//visibility:public"],
     deps = [
-        "//services/ingest/service",
+        "//services/ingest/grpc",
+        "//services/ingest/http",
+        "//services/ingest/ingest",
         "@com_github_spf13_cobra//:cobra",
         "@com_github_spf13_viper//:viper",
         "@org_uber_go_zap//:zap",

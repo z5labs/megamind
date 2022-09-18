@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "ingest",
+    srcs = ["ingest.go"],
+    importpath = "github.com/z5labs/megamind/services/ingest/ingest",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//services/ingest/proto",
+        "//subgraph",
+        "@org_uber_go_zap//:zap",
+        "@org_uber_go_zap//zapcore",
+    ],
+)
+
+go_test(
+    name = "ingest_test",
+    srcs = ["ingest_test.go"],
+    embed = [":ingest"],
+    deps = [
+        "//subgraph",
+        "@com_github_stretchr_testify//assert",
+    ],
+)
