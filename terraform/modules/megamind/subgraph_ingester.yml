@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: subgraph-ingester
+  namespace: megamind
+spec:
+  template:
+    spec:
+      containers:
+        - image: ghcr.io/z5labs/megamind/subgraph-ingester:latest
+          args: ["serve", "http"]
+          ports:
+          - name: h2c
+            containerPort: 8080
