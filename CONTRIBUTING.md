@@ -66,6 +66,7 @@ $ bazel test //...
 ### Guidelines
 
 - **Pull requests are welcome**, as long as you're willing to put in the effort to meet the guidelines.
+- All PRs should correspond to a Story issue.
 - Aim for clear, well written, maintainable code.
 - Simple and minimal approach to features, like Go.
 - Refactoring existing code now for better performance, better readability or better testability wins over adding a new feature.
@@ -73,6 +74,13 @@ $ bazel test //...
 - Don't ship a half done feature, which would require significant alterations to work fully.
 - Avoid [Technical debt](https://en.wikipedia.org/wiki/Technical_debt) like cancer.
 - Leave the code cleaner than when you began.
+
+### Stories
+
+*A story is an informal, general explanation of a software feature written from the perspective of*
+*the end user. Its purpose is to articulate how a software feature will provide value to the customer.*
+
+All open stories can be found under the issues tab or in the [Megamind](https://github.com/orgs/z5labs/projects/3/views/3) project sprints view.
 
 ### Commit messages
 
