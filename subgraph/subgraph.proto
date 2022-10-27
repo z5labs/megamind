@@ -18,6 +18,8 @@ syntax = "proto3";
 
 package subgraph;
 
+option go_package = "github.com/z5labs/megamind/subgraph";
+
 message Subgraph {
   repeated Triple triples = 1;
 }

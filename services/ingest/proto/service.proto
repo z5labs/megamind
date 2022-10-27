@@ -18,6 +18,8 @@ syntax = "proto3";
 
 package proto;
 
+option go_package = "github.com/z5labs/megamind/services/ingest/proto";
+
 import "subgraph/subgraph.proto";
 
 service SubgraphIngest {
