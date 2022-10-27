@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "megamind_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/z5labs/megamind/tools/megamind",
+    visibility = ["//visibility:private"],
+    deps = ["//tools/megamind/cmd"],
+)
+
+go_binary(
+    name = "megamind",
+    embed = [":megamind_lib"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,4 @@
+{"triples":[{"subject":{"type":"Person","tuid":"1"},"predicate":{"name":"name"},"object":{"string":"a"}}]}
+{"triples":[{"subject":{"type":"Person","tuid":"2"},"predicate":{"name":"name"},"object":{"string":"b"}}]}
+{"triples":[{"subject":{"type":"Person","tuid":"3"},"predicate":{"name":"name"},"object":{"string":"c"}}]}
+{"triples":[{"subject":{"type":"Person","tuid":"4"},"predicate":{"name":"name"},"object":{"string":"d"}}]}

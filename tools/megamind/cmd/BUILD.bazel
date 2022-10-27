@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cmd",
+    srcs = [
+        "cmd.go",
+        "dgraph.go",
+        "dgraph_ingest.go",
+        "dgraph_ingest_subgraph.go",
+        "root.go",
+    ],
+    importpath = "github.com/z5labs/megamind/tools/megamind/cmd",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//subgraph",
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_spf13_viper//:viper",
+        "@org_golang_google_protobuf//encoding/protojson",
+        "@org_golang_google_protobuf//proto",
+        "@org_golang_x_sync//errgroup",
+        "@org_uber_go_zap//:zap",
+        "@org_uber_go_zap//zapcore",
+    ],
+)
