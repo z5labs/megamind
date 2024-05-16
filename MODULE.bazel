@@ -1,0 +1,45 @@
+module(name = "com_github_z5labs_megamind")
+
+bazel_dep(name = "gazelle", version = "0.36.0")
+bazel_dep(name = "rules_go", version = "0.47.1")
+bazel_dep(name = "rules_oci", version = "1.7.5")
+bazel_dep(name = "rules_pkg", version = "0.10.1")
+bazel_dep(name = "aspect_bazel_lib", version = "2.7.3")
+
+go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
+go_sdk.download(version = "1.22.2")
+
+go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
+go_deps.from_file(go_mod = "//:go.mod")
+
+# See https://github.com/bazelbuild/rules_go/issues/3625#issuecomment-1674275131
+# go_deps.gazelle_override(
+#     path = "github.com/googleapis/gax-go/v2",
+#     directives = [
+#         "gazelle:proto disable",
+#     ]
+# )
+
+# All *direct* Go dependencies of the module have to be listed explicitly.
+use_repo(
+    go_deps,
+    "com_github_gin_gonic_gin",
+    "com_github_spf13_cobra",
+    "com_github_spf13_viper",
+    "com_github_stretchr_testify",
+    "org_golang_google_grpc",
+    "org_golang_google_protobuf",
+    "org_golang_x_sync",
+    "org_uber_go_zap",
+)
+
+oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+
+oci.pull(
+    name = "distroless_base",
+    image = "gcr.io/distroless/base",
+    digest = "sha256:ccaef5ee2f1850270d453fdf700a5392534f8d1a8ca2acda391fbb6a06b81c86",
+    platforms = ["linux/amd64", "linux/arm64"],
+)
+
+use_repo(oci, "distroless_base")

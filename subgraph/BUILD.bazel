@@ -1,23 +1,12 @@
-load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
-load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
-
-proto_library(
-    name = "subgraph_proto",
-    srcs = ["subgraph.proto"],
-    visibility = ["//visibility:public"],
-)
-
-go_proto_library(
-    name = "subgraph_go_proto",
-    importpath = "github.com/z5labs/megamind/subgraph",
-    proto = ":subgraph_proto",
-    visibility = ["//visibility:public"],
-)
+load("@rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "subgraph",
-    embed = [":subgraph_go_proto"],
+    srcs = ["subgraph.pb.go"],
     importpath = "github.com/z5labs/megamind/subgraph",
     visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+    ],
 )
