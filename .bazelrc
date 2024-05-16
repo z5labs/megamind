@@ -1,3 +1,5 @@
+common --enable_bzlmod
+
 build --show_timestamps
 
 test --test_output=errors
