@@ -2,49 +2,95 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+    paths:
+      - '**.go'
+      - '**.bazel'
+      - '.bazelversion'
+      - '.bazelrc'
+      - 'go.mod'
+      - 'go.sum'
+      - 'MODULE.bazel'
+      - 'MODULE.bazel.lock'
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+    paths:
+      - '**.go'
+      - '**.bazel'
+      - '.bazelversion'
+      - '.bazelrc'
+      - 'go.mod'
+      - 'go.sum'
+      - 'MODULE.bazel'
+      - 'MODULE.bazel.lock'
+
+permissions:
+  contents: write
+  packages: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
 
-      - name: Setup bazelisk
-        uses: bazelbuild/setup-bazelisk@v2
-
-      - name: Mount bazel cache
-        uses: actions/cache@v3
-        with:
-          path: "~/.cache/bazel"
-          key: bazel
-
-      - name: Setup useful build info
+      - name: Generate build version
         id: info
         run: |
-          echo "::set-output name=date::$(date +'%Y.%m.%d')"
-          echo "::set-output name=time::$(date +'%H%M%S')"
-          echo "::set-output name=short_commit_id::$(git rev-parse --short HEAD)"
+          formatted_date=$(date +'%Y.%m.%d')
+          time=$(date +'%H%M%S')
+          short_commit_id=$(git rev-parse --short HEAD)
+          echo "build_version=${formatted_date}.${time}.${short_commit_id}" >> $GITHUB_OUTPUT
+
+      - name: Mount Bazel cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/.cache/bazel
+          key: ${{ runner.os }}-bazel-${{ hashFiles('.bazelversion', '.bazelrc', 'MODULE.bazel') }}
+          restore-keys: |
+            ${{ runner.os }}-bazel-
+  
+      - name: Fetch dependencies
+        run: bazel fetch //...
 
       - name: Build
         run: bazel build //...
 
       - name: Test
-        run: bazel coverage //...
+        run: bazel test //...
+
+      - name: Tag repo with build version
+        run: |
+          tag=${{ steps.info.outputs.build_version }}
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git tag "${tag}"
+          git push origin --tags
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Deploy images
+      - name: Build and publish images
         run: |
-          version="${{ steps.info.outputs.date }}.${{ steps.info.outputs.time }}.${{ steps.info.outputs.short_commit_id }}"
-          images=$(bazel query "kind(\"container_push\", //...)" --output=label)
-          bazel run --define "version=$version" $images
+          tarballTargets=$(bazel query "kind(oci_tarball, //...)")
+          while IFS=';' read -ra tarballs; do
+            for tarball in "${tarballs[@]}"; do
+              bazel build $tarball
+              tarFiles=$(bazel cquery --noshow_progress --ui_event_filters=-info,-stderr --output=files $tarball)
+              img=$(docker load -q --input $tarFiles)
+              imgWithTag=${img#"Loaded image: "}
+              imgAndTag=(${imgWithTag//:/ })
+              img=${imgAndTag[0]}
+              tag=${imgAndTag[1]}
+              docker tag $imgWithTag "$img:${{ steps.info.outputs.build_version }}"
+              docker push -a $img
+            done
+          done <<< "$tarballTargets"
